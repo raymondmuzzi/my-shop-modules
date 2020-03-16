@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <description>Spring mvc configuration</description>
+
+    <!-- load the properties file -->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:myshop.properties"/>
+
+    <!-- only scan the Controller annotations -->
+    <context:component-scan base-package="com.raymondmuzzi.my.shop.web.admin" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- open the spring mvc annotation driven -->
+    <mvc:annotation-driven/>
+
+    <!-- define the view resolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+        <property name="prefix" value="${web.view.prefix}"/>
+        <property name="suffix" value="${web.view.suffix}"/>
+    </bean>
+
+    <!-- static resources mapping -->
+    <mvc:resources mapping="/static/**" location="/static/" cache-period="31536000"/>
+
+
+    <!--
+        spring mvc interceptor
+        notice: the interceptor work in reverse order
+    -->
+    <mvc:interceptors>
+
+        <!-- Login interceptor -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/static/**"/>
+            <bean class="com.raymondmuzzi.my.shop.web.admin.web.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+
+        <!-- Permission interceptor -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.raymondmuzzi.my.shop.web.admin.web.interceptor.PermissionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>
