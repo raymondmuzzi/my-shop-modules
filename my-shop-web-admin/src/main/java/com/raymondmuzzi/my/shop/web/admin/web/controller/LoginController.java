@@ -94,4 +94,16 @@ public class LoginController {
             return login(request);
         }
     }
+
+    /**
+     * Logout
+     *
+     * @param request logout request
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "login";
+    }
 }
