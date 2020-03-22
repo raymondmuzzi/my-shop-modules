@@ -20,7 +20,7 @@
         <project.reporting.outputEncoding></project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <!-- Dependencies -->
+        <!-- Dependency version properties -->
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <spring.version>4.3.20.RELEASE</spring.version>
@@ -28,6 +28,13 @@
         <jstl.version>1.2</jstl.version>
         <commons-lang3.version>3.7</commons-lang3.version>
         <junit.version>4.12</junit.version>
+        <alibaba-druid.version>1.1.11</alibaba-druid.version>
+        <mysql-connector.version>5.1.46</mysql-connector.version>
+        <mybatis.version>3.2.8</mybatis.version>
+        <mybatis-spring.version>1.3.1</mybatis-spring.version>
+        <aspectjrt.version>1.6.11</aspectjrt.version>
+        <aspectjweaver.version>1.6.11</aspectjweaver.version>
+        <cglib.version>2.1</cglib.version>
     </properties>
 
 
@@ -43,6 +50,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <!-- spring ends -->
@@ -88,19 +100,73 @@
             </dependency>
             <!-- servlet ends -->
 
-            <!-- tools begin -->
+            <!-- tools begins -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
+            <!-- tools ends -->
+
+            <!-- datasource begins -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${alibaba-druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- datasource ends -->
+
+            <!-- aop begins -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectjrt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+            <!-- aop ends -->
+
+            <!-- test begins -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-            <!-- tools end -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- test ends -->
         </dependencies>
     </dependencyManagement>
 

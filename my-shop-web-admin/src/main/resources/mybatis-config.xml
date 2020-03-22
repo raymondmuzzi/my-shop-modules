@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- global settings -->
+    <settings>
+        <!-- close global cache: second level cache -->
+        <setting name="cacheEnabled" value="false"/>
+        <!-- lazy loading -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <!-- could use column's alias or not -->
+        <setting name="useColumnLabel" value="true"/>
+        <!-- allow jdbc to generate keys, needs the driver's support -->
+        <setting name="useGeneratedKeys" value="false"/>
+        <!-- note mybatis how to map the entity's field to the database's column -->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <!-- SIMPLE, REUSE, BATCH are available -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!-- use camel case to match filed -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- cache's scope: session, statement, default is session -->
+        <setting name="localCacheScope" value="SESSION"/>
+        <!-- set the jdbc's value when the filed is null -->
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+</configuration>

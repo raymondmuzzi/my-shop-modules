@@ -1,7 +1,7 @@
 package com.raymondmuzzi.my.shop.web.admin.web.interceptor;
 
 import com.raymondmuzzi.my.shop.common.constant.Constants;
-import com.raymondmuzzi.my.shop.domain.User;
+import com.raymondmuzzi.my.shop.domain.TbUser;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +35,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         if (modelAndView.getViewName() != null && modelAndView.getViewName().endsWith("login")) {
-            User user = (User) httpServletRequest.getSession().getAttribute(Constants.SESSION_USER);
+            TbUser user = (TbUser) httpServletRequest.getSession().getAttribute(Constants.SESSION_USER);
             if (user != null) {
                 httpServletResponse.sendRedirect("/main");
             }

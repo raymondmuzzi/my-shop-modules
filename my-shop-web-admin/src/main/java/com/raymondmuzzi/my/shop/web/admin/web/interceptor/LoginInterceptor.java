@@ -1,7 +1,7 @@
 package com.raymondmuzzi.my.shop.web.admin.web.interceptor;
 
 import com.raymondmuzzi.my.shop.common.constant.Constants;
-import com.raymondmuzzi.my.shop.domain.User;
+import com.raymondmuzzi.my.shop.domain.TbUser;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,7 +27,7 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        User user = (User) request.getSession().getAttribute(Constants.SESSION_USER);
+        TbUser user = (TbUser) request.getSession().getAttribute(Constants.SESSION_USER);
 
         // Login failed
         if (null == user) {

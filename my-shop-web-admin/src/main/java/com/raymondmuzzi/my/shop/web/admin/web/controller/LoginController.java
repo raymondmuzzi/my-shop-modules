@@ -2,8 +2,8 @@ package com.raymondmuzzi.my.shop.web.admin.web.controller;
 
 import com.raymondmuzzi.my.shop.common.constant.Constants;
 import com.raymondmuzzi.my.shop.common.utils.CookieUtils;
-import com.raymondmuzzi.my.shop.domain.User;
-import com.raymondmuzzi.my.shop.web.admin.service.UserService;
+import com.raymondmuzzi.my.shop.domain.TbUser;
+import com.raymondmuzzi.my.shop.web.admin.service.TbUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class LoginController {
     private static final String COOKIE_NAME_USER_INFO = "userInfo";
 
     @Autowired
-    private UserService userService;
+    private TbUserService userService;
 
     /**
      * Forward login request to achieve remember me function
@@ -41,9 +41,9 @@ public class LoginController {
         String cookieValue = CookieUtils.getCookieValue(request, COOKIE_NAME_USER_INFO);
         if (StringUtils.isNotBlank(cookieValue)) {
             String[] split = cookieValue.split(":");
-            String email = split[0];
+            String username = split[0];
             String password = split[1];
-            request.setAttribute("email", email);
+            request.setAttribute("username", username);
             request.setAttribute("password", password);
             request.setAttribute("isRemembered", true);
         }
@@ -53,16 +53,16 @@ public class LoginController {
     /**
      * User login controller by POST method
      *
-     * @param email    user's email from font-end
+     * @param username user's username from font-end
      * @param password user's password from front-end
      * @param request  the http servlet request object
-     * @param response the http servlet resposne object
+     * @param response the http servlet response object
      * @return the view path [login.jsp]
      * @throws IOException
      * @throws ServletException
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@RequestParam(required = true, value = "email") String email,
+    public String login(@RequestParam(required = true, value = "username") String username,
                         @RequestParam(required = true, value = "password") String password,
                         HttpServletRequest request,
                         HttpServletResponse response) throws IOException, ServletException {
@@ -73,7 +73,7 @@ public class LoginController {
             CookieUtils.deleteCookie(request, response, COOKIE_NAME_USER_INFO);
         }
 
-        User user = userService.login(email, password);
+        TbUser user = userService.login(username, password);
         // Login succeed
         if (user != null) {
             LOGGER.info("User {} login succeed", user.getUsername());
@@ -84,12 +84,14 @@ public class LoginController {
 
             // If select the remember me checkbox, enable the remember me function
             if (isRemembered) {
-                CookieUtils.setCookie(request, response, COOKIE_NAME_USER_INFO, String.format("%s:%s", email, password), 7 * 24 * 60 * 60);
+                CookieUtils.setCookie(request, response, COOKIE_NAME_USER_INFO, String.format("%s:%s", username, password), 7 * 24 * 60 * 60);
             }
-            // Redirect by spring mvc
+            // redirect
             return "redirect:/main";
-        } else {
-            LOGGER.info("User {} login failed", email);
+        }
+        // Login failed
+        else {
+            LOGGER.info("User {} login failed", username);
             request.setAttribute("message", "ERROR Incorrect username or password");
             return login(request);
         }
