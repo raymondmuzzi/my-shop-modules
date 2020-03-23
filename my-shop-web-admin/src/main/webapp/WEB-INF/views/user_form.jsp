@@ -53,37 +53,42 @@
                         <!-- /.box-header -->
                         <!-- form start -->
                         <!-- form:form spring mvc form tag -->
-                        <form:form cssClass="form-horizontal" action="/user/save" method="post" modelAttribute="tbUser">
+                        <form:form id="inputForm" cssClass="form-horizontal" action="/user/save" method="post" modelAttribute="tbUser">
+
                             <div class="box-body">
 
+                                <!-- username column -->
                                 <div class="form-group">
                                     <label for="username" class="col-sm-2 control-label">Username</label>
                                     <div class="col-sm-10">
-                                        <form:input cssClass="form-control" path="username"
+                                        <form:input cssClass="form-control required" path="username"
                                                placeholder="Please input username"/>
                                     </div>
                                 </div>
 
+                                <!-- password column -->
                                 <div class="form-group">
                                     <label for="password" class="col-sm-2 control-label">Password</label>
                                     <div class="col-sm-10">
-                                        <form:password cssClass="form-control" path="password"
+                                        <form:password cssClass="form-control required" path="password"
                                                placeholder="Please declare password with character and digit"/>
                                     </div>
                                 </div>
 
+                                <!-- phone column -->
                                 <div class="form-group">
                                     <label for="phone" class="col-sm-2 control-label">Phone</label>
                                     <div class="col-sm-10">
-                                        <form:input type="text" cssClass="form-control" path="phone"
+                                        <form:input type="text" cssClass="form-control required mobile" path="phone"
                                                placeholder="Your phone number"/>
                                     </div>
                                 </div>
 
+                                <!-- email column -->
                                 <div class="form-group">
                                     <label for="email" class="col-sm-2 control-label">Email</label>
                                     <div class="col-sm-10">
-                                        <form:input type="email" cssClass="form-control" path="email"
+                                        <form:input type="email" cssClass="form-control required email" path="email"
                                                placeholder="Your email"/>
                                     </div>
                                 </div>
@@ -109,8 +114,5 @@
     <%-- copyright jsp --%>
     <jsp:include page="../includes/copyright.jsp"/>
 </div>
-
-<%-- footer jsp --%>
-<jsp:include page="../includes/footer.jsp"/>
 </body>
 </html>

@@ -84,7 +84,25 @@
         FROM
         tb_user
         WHERE
-        username like CONCAT('%',#{username},'%')
+        username LIKE CONCAT('%',#{username},'%')
+    </select>
+
+    <select id="search" resultType="com.raymondmuzzi.my.shop.domain.TbUser">
+        SELECT
+        <include refid="base_column"/>
+        FROM
+        tb_user
+        <where>
+            <if test="null != username and '' != username">
+                OR username LIKE CONCAT('%',#{username},'%')
+            </if>
+            <if test="null != phone and '' != phone">
+                OR phone LIKE CONCAT('%',#{phone},'%')
+            </if>
+            <if test="null != email and '' != email">
+                OR email LIKE CONCAT('%',#{email},'%')
+            </if>
+        </where>
     </select>
 
 

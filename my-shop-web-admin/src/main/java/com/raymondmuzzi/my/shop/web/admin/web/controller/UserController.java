@@ -33,7 +33,7 @@ public class UserController {
     /**
      * The @ModelAttribute annotation annotated method will be invoked
      * before all the methods in UserController who annotated with @RequestMapping.
-     *
+     * <p>
      * The returned result will be put into the Model object, we can use this annotation
      * help the form table echo the data inputted before
      *
@@ -98,5 +98,19 @@ public class UserController {
             model.addAttribute("tbUser", tbUser);
             return "user_form";
         }
+    }
+
+    /**
+     * Search the user list by keyword from front-end
+     *
+     * @param keyword the search keyword
+     * @param model   model object
+     * @return the view path
+     */
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public String search(String keyword, Model model) {
+        List<TbUser> tbUsers = tbUserService.search(keyword);
+        model.addAttribute("tbUsers", tbUsers);
+        return "user_list";
     }
 }

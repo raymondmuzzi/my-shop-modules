@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
@@ -137,6 +138,15 @@ public class TbUserServiceImpl implements TbUserService {
         return userList;
     }
 
+    @Override
+    public List<TbUser> search(String keyword) {
+        TbUser tbUser = new TbUser();
+        tbUser.setUsername(keyword);
+        tbUser.setEmail(keyword);
+        tbUser.setPhone(keyword);
+        return tbUserDao.search(tbUser);
+    }
+
     /**
      * Check the user's save info is legal or not
      *
@@ -148,29 +158,17 @@ public class TbUserServiceImpl implements TbUserService {
         BaseResult baseResult = BaseResult.success();
         if (tbUser == null) {
             baseResult = BaseResult.fail("TbUser cannot be null");
-        }
-
-        else if (StringUtils.isBlank(tbUser.getUsername())) {
+        } else if (StringUtils.isBlank(tbUser.getUsername())) {
             baseResult = BaseResult.fail("The username cannot be empty");
-        }
-
-        else if (StringUtils.isBlank(tbUser.getPassword())) {
+        } else if (StringUtils.isBlank(tbUser.getPassword())) {
             baseResult = BaseResult.fail("The password cannot be empty");
-        }
-
-        else if (StringUtils.isBlank(tbUser.getPhone())) {
+        } else if (StringUtils.isBlank(tbUser.getPhone())) {
             baseResult = BaseResult.fail("The phone cannot be empty");
-        }
-
-        else if (!RegexpUtils.checkPhone(tbUser.getPhone())) {
+        } else if (!RegexpUtils.checkPhone(tbUser.getPhone())) {
             baseResult = BaseResult.fail("The phone number is illegal");
-        }
-
-        else if (StringUtils.isBlank(tbUser.getEmail())) {
+        } else if (StringUtils.isBlank(tbUser.getEmail())) {
             baseResult = BaseResult.fail("The email cannot be empty");
-        }
-
-        else if (!RegexpUtils.checkEmail(tbUser.getEmail())) {
+        } else if (!RegexpUtils.checkEmail(tbUser.getEmail())) {
             baseResult = BaseResult.fail("The email is illegal");
         }
 

@@ -67,4 +67,12 @@ public interface TbUserDao {
      * @return user's info list
      */
     List<TbUser> getByUsernameLike(@Param("username") String username);
+
+    /**
+     * Search the List<TbUser> where matched the input param
+     *
+     * @param tbUser the query param encapsulated in the TbUser object
+     * @return the query result
+     */
+    List<TbUser> search(TbUser tbUser);
 }

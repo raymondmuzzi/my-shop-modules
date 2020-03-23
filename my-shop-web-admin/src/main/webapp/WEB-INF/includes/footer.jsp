@@ -5,6 +5,9 @@
 <script src="/static/assets/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/static/assets/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- jQuery validation plugin 1.14.0 -->
+<script src="/static/assets/plugins/jquery-validation/js/jquery.validate.js"></script>
+<script src="/static/assets/plugins/jquery-validation/js/additional-methods.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button);
@@ -21,3 +24,6 @@
 <script src="/static/assets/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="/static/assets/js/adminlte.min.js"></script>
+
+<!-- App -->
+<script src="/static/assets/app/validate.js"></script>

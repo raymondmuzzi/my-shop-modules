@@ -69,15 +69,16 @@
                             </div>
 
                             <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control pull-right"
-                                           placeholder="Search">
-
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
-                                        </button>
+                                <form action="/user/search" method="post">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" name="keyword" class="form-control pull-right"
+                                               placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -102,8 +103,10 @@
                                         <td>${tbUser.username}</td>
                                         <td>${tbUser.email}</td>
                                         <td>${tbUser.phone}</td>
-                                        <td><fmt:formatDate value="${tbUser.updated}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                        <td><fmt:formatDate value="${tbUser.created}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                        <td><fmt:formatDate value="${tbUser.updated}"
+                                                            pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                        <td><fmt:formatDate value="${tbUser.created}"
+                                                            pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                         <td>
                                             <a type="button" class="btn btn-sm btn-default"
                                                href="/user/query/${tbUser.id}">

@@ -96,4 +96,12 @@ public class TbUserServiceTest {
             LOGGER.info("Result:{}", tbUser);
         }
     }
+
+    @Test
+    public void testTbUserSearch() {
+        List<TbUser> list = tbUserService.search("a");
+        for (TbUser tbUser : list) {
+            LOGGER.info("Search result:{}", tbUser);
+        }
+    }
 }

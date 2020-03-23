@@ -28,7 +28,7 @@ public interface TbUserService {
 
     /**
      * Save the user's info
-     *
+     * <p>
      * If the user's id is null, add the user.
      * Or update the user
      *
@@ -68,4 +68,12 @@ public interface TbUserService {
      * @return user's info
      */
     List<TbUser> getLikeUsername(String username);
+
+    /**
+     * Search the TbUser list by the keyword
+     *
+     * @param keyword search keyword
+     * @return the TbUser list
+     */
+    List<TbUser> search(String keyword);
 }

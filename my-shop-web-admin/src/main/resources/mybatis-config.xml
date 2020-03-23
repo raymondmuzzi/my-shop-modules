@@ -5,6 +5,8 @@
 <configuration>
     <!-- global settings -->
     <settings>
+        <!-- print mybatis sql log -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
         <!-- close global cache: second level cache -->
         <setting name="cacheEnabled" value="false"/>
         <!-- lazy loading -->
