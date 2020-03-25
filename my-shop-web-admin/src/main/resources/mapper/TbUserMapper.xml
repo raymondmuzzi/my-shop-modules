@@ -3,6 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.raymondmuzzi.my.shop.web.admin.dao.TbUserDao">
 
+
+    <sql id="base_column_with_id">
+        id,
+        username,
+        password,
+        phone,
+        email,
+        created,
+        updated
+    </sql>
+
     <sql id="base_column">
         username,
         password,
@@ -55,14 +66,14 @@
 
     <select id="selectAll" resultType="com.raymondmuzzi.my.shop.domain.TbUser">
         SELECT
-        <include refid="base_column"/>
+        <include refid="base_column_with_id"/>
         FROM
         tb_user
     </select>
 
     <select id="selectUserByUsername" resultType="com.raymondmuzzi.my.shop.domain.TbUser">
         SELECT
-        <include refid="base_column"/>
+        <include refid="base_column_with_id"/>
         FROM
         tb_user
         WHERE
@@ -71,7 +82,7 @@
 
     <select id="getById" resultType="com.raymondmuzzi.my.shop.domain.TbUser">
         SELECT
-        <include refid="base_column"/>
+        <include refid="base_column_with_id"/>
         FROM
         tb_user
         WHERE
@@ -80,7 +91,7 @@
 
     <select id="getByUsernameLike" resultType="com.raymondmuzzi.my.shop.domain.TbUser">
         SELECT
-        <include refid="base_column"/>
+        <include refid="base_column_with_id"/>
         FROM
         tb_user
         WHERE
@@ -89,21 +100,31 @@
 
     <select id="search" resultType="com.raymondmuzzi.my.shop.domain.TbUser">
         SELECT
-        <include refid="base_column"/>
+        <include refid="base_column_with_id"/>
         FROM
         tb_user
         <where>
             <if test="null != username and '' != username">
-                OR username LIKE CONCAT('%',#{username},'%')
+                AND username LIKE CONCAT('%',#{username},'%')
             </if>
             <if test="null != phone and '' != phone">
-                OR phone LIKE CONCAT('%',#{phone},'%')
+                AND phone LIKE CONCAT('%',#{phone},'%')
             </if>
             <if test="null != email and '' != email">
-                OR email LIKE CONCAT('%',#{email},'%')
+                AND email LIKE CONCAT('%',#{email},'%')
             </if>
         </where>
     </select>
 
+    <delete id="deleteMulti">
+        DELETE
+        FROM
+        tb_user
+        WHERE
+        id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

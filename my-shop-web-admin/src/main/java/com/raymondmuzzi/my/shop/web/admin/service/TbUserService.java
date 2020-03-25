@@ -70,10 +70,18 @@ public interface TbUserService {
     List<TbUser> getLikeUsername(String username);
 
     /**
-     * Search the TbUser list by the keyword
+     * Search the TbUser list by the form data
      *
-     * @param keyword search keyword
+     * @param tbUser the form data from front-end
      * @return the TbUser list
      */
-    List<TbUser> search(String keyword);
+    List<TbUser> search(TbUser tbUser);
+
+    /**
+     * Delete user data in db by id array
+     *
+     * @param ids id array
+     * @return affected row number
+     */
+    int deleteMulti(String[] ids);
 }

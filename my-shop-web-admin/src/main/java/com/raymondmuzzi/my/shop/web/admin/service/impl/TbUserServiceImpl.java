@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
@@ -139,12 +138,13 @@ public class TbUserServiceImpl implements TbUserService {
     }
 
     @Override
-    public List<TbUser> search(String keyword) {
-        TbUser tbUser = new TbUser();
-        tbUser.setUsername(keyword);
-        tbUser.setEmail(keyword);
-        tbUser.setPhone(keyword);
+    public List<TbUser> search(TbUser tbUser) {
         return tbUserDao.search(tbUser);
+    }
+
+    @Override
+    public int deleteMulti(String[] ids) {
+        return tbUserDao.deleteMulti(ids);
     }
 
     /**

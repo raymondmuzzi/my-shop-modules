@@ -99,9 +99,19 @@ public class TbUserServiceTest {
 
     @Test
     public void testTbUserSearch() {
-        List<TbUser> list = tbUserService.search("a");
+        TbUser tbUser1 = new TbUser();
+        tbUser1.setEmail("a");
+        tbUser1.setPhone("3");
+        List<TbUser> list = tbUserService.search(tbUser1);
         for (TbUser tbUser : list) {
             LOGGER.info("Search result:{}", tbUser);
         }
+    }
+
+    @Test
+    public void testTbUserDeleteMulti() {
+        String ids = "40,47";
+        int n = tbUserService.deleteMulti(ids.split(","));
+        LOGGER.info("Affected row number is {}", n);
     }
 }

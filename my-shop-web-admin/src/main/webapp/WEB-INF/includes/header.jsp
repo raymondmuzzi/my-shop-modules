@@ -18,6 +18,8 @@ folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="/static/assets/css/skins/_all-skins.min.css">
 <!-- bootstrap wysihtml5 - text editor -->
 <link rel="stylesheet" href="/static/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="/static/assets/plugins/iCheck/all.css"/>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

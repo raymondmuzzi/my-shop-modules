@@ -4,6 +4,7 @@ import com.raymondmuzzi.my.shop.common.constant.StatusEnum;
 import com.raymondmuzzi.my.shop.common.dto.BaseResult;
 import com.raymondmuzzi.my.shop.domain.TbUser;
 import com.raymondmuzzi.my.shop.web.admin.service.TbUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -101,16 +103,40 @@ public class UserController {
     }
 
     /**
-     * Search the user list by keyword from front-end
+     * Search the user list by form data from front-end
      *
-     * @param keyword the search keyword
-     * @param model   model object
+     * @param tbUser the form data
+     * @param model  model object
      * @return the view path
      */
     @RequestMapping(value = "search", method = RequestMethod.POST)
-    public String search(String keyword, Model model) {
-        List<TbUser> tbUsers = tbUserService.search(keyword);
+    public String search(TbUser tbUser, Model model) {
+        List<TbUser> tbUsers = tbUserService.search(tbUser);
         model.addAttribute("tbUsers", tbUsers);
         return "user_list";
+    }
+
+    /**
+     * Delete operation is not idempotent operation,
+     * so we should use POST method to handle
+     *
+     * @param ids
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public BaseResult delete(String ids) {
+        BaseResult baseResult;
+        // delete succeed
+        if (StringUtils.isNotBlank(ids)) {
+            String[] idArray = ids.split(",");
+            int rows = tbUserService.deleteMulti(idArray);
+            baseResult = BaseResult.success(String.format("Delete user succeed, deleted %d rows", rows));
+        }
+        // delete failed
+        else {
+            baseResult = BaseResult.fail("Delete user failed");
+        }
+        return baseResult;
     }
 }

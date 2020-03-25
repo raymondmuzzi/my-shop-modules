@@ -35,6 +35,7 @@
         <aspectjrt.version>1.6.11</aspectjrt.version>
         <aspectjweaver.version>1.6.11</aspectjweaver.version>
         <cglib.version>2.1</cglib.version>
+        <jackson.version>2.9.5</jackson.version>
     </properties>
 
 
@@ -153,6 +154,19 @@
                 <version>${cglib.version}</version>
             </dependency>
             <!-- aop ends -->
+
+            <!-- json begins -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- json ends -->
 
             <!-- test begins -->
             <dependency>

@@ -75,4 +75,13 @@ public interface TbUserDao {
      * @return the query result
      */
     List<TbUser> search(TbUser tbUser);
+
+
+    /**
+     * Delete multi user data in db by id array
+     *
+     * @param ids id array
+     * @return affected row number
+     */
+    int deleteMulti(@Param("ids") String[] ids);
 }
