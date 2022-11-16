@@ -35,7 +35,7 @@
         <aspectjrt.version>1.6.11</aspectjrt.version>
         <aspectjweaver.version>1.6.11</aspectjweaver.version>
         <cglib.version>2.1</cglib.version>
-        <jackson.version>2.9.5</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
     </properties>
 
 
